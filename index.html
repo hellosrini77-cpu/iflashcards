@@ -1089,10 +1089,20 @@ Guidelines:
                     throw new Error(data.error.message || 'API error');
                 }
 
-                const text = data.content[0].text;
+                // Handle web search response - extract text from all text blocks
+                let text = '';
+                if (data.content && Array.isArray(data.content)) {
+                    text = data.content
+                        .filter(block => block.type === 'text')
+                        .map(block => block.text)
+                        .join('\n');
+                }
+                
+                console.log('API response text:', text);
+                
                 const jsonMatch = text.match(/\[[\s\S]*\]/);
                 if (!jsonMatch) {
-                    throw new Error('Invalid response format');
+                    throw new Error('Invalid response format - no JSON array found');
                 }
 
                 generatedCards = JSON.parse(jsonMatch[0]);
