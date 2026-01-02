@@ -406,15 +406,15 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: var(--bg-card);
+            background: #1a1a24;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 24px;
             cursor: grab;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            transform-style: preserve-3d;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .swipe-card.dragging {
@@ -445,6 +445,8 @@
             line-height: 1.5;
             padding-top: 16px;
             border-top: 1px solid var(--border);
+            overflow: hidden;
+            max-height: 150px;
         }
 
         .swipe-indicator {
